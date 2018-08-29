@@ -11,12 +11,12 @@ vpoint1=pd.read_excel("F:\\FILE\\rd\\100\\VPE100_1000_100vpoint1.xlsx",header=No
 point2=pd.read_excel("F:\\FILE\\rd\\100\\VPE100_1000_100point2.xlsx",header=None)
 vpoint2=pd.read_excel("F:\\FILE\\rd\\100\\VPE100_1000_100vpoint2.xlsx",header=None)
 ref=pd.read_excel("F:\\FILE\\ref.xlsx",header=None)
-#ATCG统一大写
+
 for i in range(20000):
     for j in range(50):
         if ref.values[i,j]=='a' or ref.values[i,j]=='t' or ref.values[i,j]=='c' or ref.values[i,j]=='g' :
                 ref.values[i,j]=str.upper(ref.values[i,j])     
-#与reference进行比对
+
 for i in range(vpoint1.iloc[:,0].size):
     for j in range(vpoint1.columns.size):
         if vpoint1.values[i,j] is not np.nan and vpoint1.values[i,j]!='N':
@@ -35,6 +35,6 @@ for i in range(vpoint2.iloc[:,0].size):
                 vpoint2.values[i,j]='A'
         else:
             break   
-#输出
+
 vpoint1.to_excel('F:\\FILE\\rd\\100\\VPE100_1000_100vpointAB1.xlsx',sheet_name='Sheet1')  
 vpoint2.to_excel('F:\\FILE\\rd\\100\\VPE100_1000_100vpointAB2.xlsx',sheet_name='Sheet1')  
