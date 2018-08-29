@@ -9,7 +9,6 @@ import pandas as pd
 import itertools
 import scipy.io as scio  
 
-#数据载入
 pointAB=pd.read_excel("F:\\FILE\\rd\\100\\pointAB.xlsx",header=None)
 vpointAB=pd.read_excel("F:\\FILE\\rd\\100\\vpointAB.xlsx",header=None)
 cluster=pd.read_excel("F:\\FILE\\cluster.xlsx",header=None)
@@ -17,7 +16,6 @@ w0=np.mat(np.zeros((11000 , 11000)))
 w1=np.mat(np.zeros((11000 , 11000)))
 f0=np.mat(np.zeros((11000 , 11000)))
 f1=np.mat(np.zeros((11000 , 11000)))
-#权重矩阵计算
 for i in range(pointAB.iloc[:,0].size):
     for j in itertools.combinations(list(range(pointAB.columns.size)),2):
         if vpointAB.values[i, j[0]] is not np.nan and vpointAB.values[i, j[1]] is not np.nan:
@@ -37,15 +35,15 @@ for i in range(11000):
         if F[i, j]!=0:
             f0[i, j]=N0[i, j]/F[i, j]
             f1[i, j]=N1[i, j]/F[i, j]
-#权重矩阵 上半矩阵
+
 w=f0-f1
-#根据阈值删除边
+
 for i in range(11000):
     for j in range(11000):
         if F[i, j]<=2:
             w[i, j]=0
 w += w.T - np.diag(w.diagonal())
-#分离子克隆
+
 ws0=np.copy(w)
 ws1=np.copy(w)
 ws2=np.copy(w)
@@ -61,18 +59,15 @@ for i in range(11000):
     if cluster.values[i,0]!=2:
         ws2[i,:]=0
         ws2[:,i]=0
-#输出数据
-scio.savemat('F:\\FILE\\file\\w.mat', {'matrix': w})  
-scio.savemat('F:\\FILE\\file\\ws0.mat', {'matrix': ws0})  
-scio.savemat('F:\\FILE\\file\\ws1.mat', {'matrix': ws1})
-scio.savemat('F:\\FILE\\file\\ws2.mat', {'matrix': ws2})   
 
-#厚度剥离步骤
+scio.savemat('F:\\FILE\\file\\w.mat', {'matrix': w})  
+scio.savemat('F:\\FILE\\file\\w0.mat', {'matrix': ws0})  
+ 
 w00=np.mat(np.zeros((11000 , 11000)))
 w10=np.mat(np.zeros((11000 , 11000))) 
 f00=np.mat(np.zeros((11000 , 11000)))
 f10=np.mat(np.zeros((11000 , 11000)))
-#各级子克隆占比
+
 ratio=[0.3,0.5,0.2]
 for j in range(11000):
     for k in range(11000):
