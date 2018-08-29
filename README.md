@@ -3,7 +3,18 @@
 
 ## Step1:simulation
 #### #generating the second generation sequencing data, paired-end reads
+      Usage:   norsim \[options] <ref.fa> <nor.sim>
+      Options: -r FLOAT	mutation rate of GV (0.0010000000)
+         -R FLOAT      	fraction of indels (0.000000)
+         -X FLOAT      	probability an indel is extended (0.300000)
+         -D FLOAT      	delete rate in indel (0.500000)
+         -B FLOAT      	BB rate in mutation (0.333330)
+         -I <delpos.txt>  	input long indel set file
+         -A <nor_AB.idx>  	output the positions of AB mutation type in normal
+         -o <nor_simout.txt>  	result for runing case
+```
 ./norsim -r 0.001 -B 0 -A nor_AB.idx ref.fa nor.sim<br>
+```
 ./tumsim -r 0.007  -A 0 -B 0 -n 7000 -p 0 -l 100000 ref.fa nor.sim nor_AB.idx s1.sim<br>
 ./tumsim -r 0.003  -A 0 -B 0 -n 3000 -p 0 -l 100000 ref.fa s1.sim nor_AB.idx s2.sim<br>
 
