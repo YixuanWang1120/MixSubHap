@@ -134,7 +134,7 @@ bwa sampe -f p1.sam ref.fa t100_left.sai t100_right.sai t100_left.fq t100_right.
 
       Usage: input: w0.mat and ww.mat
              output: w0_nonezero.mat and a0.mat
-                     ww_nonezero.mat anfd aww.mat
+                     ww_nonezero.mat and aww.mat
 #### #Generating the spanning tree.
 **15. max_spanning_tree.py**<br>
 
